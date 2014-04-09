@@ -32,12 +32,18 @@ adjusting values
 
 int snakeX = 0;    // create variables for snake
 int snakeY = 0;
-int dotX = 0;    // create variables for dot
-int dotY = 0;
+int appleX = 0;    // create variables for dot
+int appleY = 0;
 
 int direction = 0;    //directional variable 
 
-int speed = 300; 
+boolean appleEat = true;  // if u eat apples
+
+byte score = 1;  // light up the top
+
+int speed = 100; // speed stuff
+
+int eatenApples = 1; // track how many apples eaten (for the score indicator)
 
 #include <MeggyJrSimple.h>    // Required code, line 1 of 2.
 
@@ -46,9 +52,12 @@ void setup()
   MeggyJrSimpleSetup();      // Required code, line 2 of 2.
 }
 
-void loop()                     // run over and over again
+void loop()                    
 {
-  DrawPx(snakeX,snakeY,Green); // snake-kun
+  DrawPx(snakeX,snakeY,Green); // ...snake-kun...
+  DrawPx (appleX,appleY,Red);  // ...apple-chan!!!
+  
+  // vvv defining what numbers are up etc vvv
   
   CheckButtonsPress();
     if (Button_Up)
@@ -62,12 +71,6 @@ void loop()                     // run over and over again
 
     if (Button_Right)
         direction = 90;
-
-    if (Button_A)
-        speed-50;
-
-    if (Button_B)
-        speed+50;
       
   if (direction == 0) // if direction is UP
     {
@@ -106,8 +109,28 @@ void loop()                     // run over and over again
          snakeX--;
      }
 
+if (appleEat)  // after you eat an apple, make a new apple in a random spot
+  {
+    appleX = random(8);
+    appleY = random(8);
+    appleEat = false;
+    eatenApples = eatenApples*2;
+    Tone_Start(2500,100);
+    ;
+  }
+
+if (snakeX == appleX && snakeY == appleY)  // apple collision detection
+  appleEat = true;
+  
+if (appleEat)
+  {
+    SetAuxLEDs(eatenApples-1);
+  }
+  
+/* display stuff*/
+
 DisplaySlate();
-delay(speed);
+delay(100);
 ClearSlate();
        
 }
