@@ -123,9 +123,7 @@ if (snakeX == appleX && snakeY == appleY)  // apple collision detection
   appleEat = true;
   
 if (appleEat)
-  {
-    SetAuxLEDs(eatenApples-1);
-  }
+    SetAuxLEDs(eatenApples-1);    // updating the topside LEDs to represent the score
   
 /* display stuff*/
 
