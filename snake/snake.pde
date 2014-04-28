@@ -75,36 +75,28 @@ void loop()
   if (direction == 0) // if direction is UP
     {
       if (snakeY==7)
-      {
         snakeY=0;
-      }
       else
         snakeY++;
     }
   if (direction == 90) // if going RIGHT
     {
       if (snakeX==7)
-      {
         snakeX=0;
-      }
       else
         snakeX++;
     }
   if (direction == 180) // if going DOWN
      {
        if (snakeY==0)
-       {
          snakeY=7;
-       }
        else
          snakeY--;
      }
   if (direction == 270) // if going LEFT
      {
        if (snakeX==0)
-       {
          snakeX=7;
-       }
        else
          snakeX--;
      }
